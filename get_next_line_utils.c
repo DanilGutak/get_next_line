@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:13:25 by dgutak            #+#    #+#             */
-/*   Updated: 2023/07/17 13:58:39 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:40:31 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,34 +75,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	return (free(s1), ret);
 }
-
-/* char	*ft_strjoin(char *resource, char *buffer)
-{
-	size_t	i;
-	size_t	j;
-	char	*str;
-
-	if (!resource)
-	{
-		resource = malloc(1 * sizeof(char));
-		resource[0] = '\0';
-	}
-	if (!buffer || !resource)
-		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(resource) + ft_strlen(buffer) + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	j = 0;
-	if (resource)
-		while (resource[++i] != '\0')
-			str[i] = resource[i];
-	while (buffer[j] != '\0')
-		str[i++] = buffer[j++];
-	str[ft_strlen(resource) + ft_strlen(buffer)] = '\0';
-	free(resource);
-	return (str);
-} */
 
 int	ft_strlen(const char *str)
 {
