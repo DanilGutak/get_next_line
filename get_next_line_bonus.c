@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:13:21 by dgutak            #+#    #+#             */
-/*   Updated: 2023/07/17 14:12:14 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/07/17 14:36:38 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,18 @@ char	*delete_line(char *buf)
 	while (buf[z] && buf[z] != '\n')
 		z++;
 	if (!buf[z])
-	{
-		free(buf);
-		return (NULL);
-	}
+		return (free(buf), NULL);
 	ret = ft_calloc(ft_strlen(buf) - z + 1, sizeof(char));
 	if (!ret)
-	{
-		free(buf);
-		return (NULL);
-	}
+		return (free(buf), NULL);
 	s = 0;
 	z++;
 	while (buf[z])
 		ret[s++] = buf[z++];
-	free(buf);
-	return (ret);
+	return (free(buf), ret);
 }
 
-char	*readf(int fd, char *buf)
+char	*readfunk(int fd, char *buf)
 {
 	int		readen;
 	char	*temp;
@@ -76,27 +69,8 @@ char	*readf(int fd, char *buf)
 		temp[readen] = '\0';
 		buf = ft_strjoin(buf, temp);
 	}
-	free(temp);
-	return (buf);
+	return (free(temp), buf);
 }
-/* char	*readf(int fd, char *resource)
-{
-	char	*buffer;
-	int		reading_bytes;
-
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	reading_bytes = 1;
-	while (!ft_strchr(resource, '\n') && reading_bytes != 0)
-	{
-		reading_bytes = read(fd, buffer, BUFFER_SIZE);
-		buffer[reading_bytes] = '\0';
-		resource = ft_strjoin(resource, buffer);
-	}
-	free(buffer);
-	return (resource);
-} */
 
 char	*get_next_line(int fd)
 {
@@ -104,14 +78,10 @@ char	*get_next_line(int fd)
 	char		*ret;
 
 	if (read(fd, 0, 0) < 0)
-	{
-		free(buffer[fd]);
-		buffer[fd] = 0;
-		return (0);
-	}
+		return (free(buffer[fd]), buffer[fd] = 0, NULL);
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buffer[fd] = readf(fd, buffer[fd]);
+	buffer[fd] = readfunk(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
 	ret = take_line(buffer[fd]);
