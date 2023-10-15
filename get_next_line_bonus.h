@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:13:15 by dgutak            #+#    #+#             */
-/*   Updated: 2023/07/17 14:11:57 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:39:43 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-# define OPEN_MAX 1024
+# define OPEN_MAX 8192
 
 # include <stddef.h>
 # include <stdlib.h>

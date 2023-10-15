@@ -15,7 +15,16 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*res;
+	size_t	check;
 
+	check = nmemb * size;
+	if (nmemb != 0 && check / nmemb != size)
+		return (0);
+	if (nmemb == 0 || size == 0)
+	{
+		nmemb = 1;
+		size = 1;
+	}
 	res = malloc(nmemb * size);
 	if (!res)
 		return (0);
@@ -60,7 +69,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_calloc(1, sizeof(char));
 	temp = s1;
-	if (!s2 || !s1)
+	if (!s1)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	ret = ft_calloc((len + 1), sizeof(char));

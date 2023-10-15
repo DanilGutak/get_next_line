@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 14:13:21 by dgutak            #+#    #+#             */
-/*   Updated: 2023/07/17 14:36:38 by dgutak           ###   ########.fr       */
+/*   Created: 2023/09/11 18:29:52 by dgutak            #+#    #+#             */
+/*   Updated: 2023/09/11 18:29:53 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,15 @@ char	*readfunk(int fd, char *buf)
 	while (!ft_strchr(buf, '\n') && readen != 0)
 	{
 		readen = read(fd, temp, BUFFER_SIZE);
+		if (readen < 0)
+		{
+			if (buf != NULL)
+			{
+				free(buf);
+				buf = 0;
+			}
+			return (free(temp), NULL);
+		}
 		temp[readen] = '\0';
 		buf = ft_strjoin(buf, temp);
 	}
@@ -77,8 +86,6 @@ char	*get_next_line(int fd)
 	static char	*buffer[OPEN_MAX];
 	char		*ret;
 
-	if (read(fd, 0, 0) < 0)
-		return (free(buffer[fd]), buffer[fd] = 0, NULL);
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	buffer[fd] = readfunk(fd, buffer[fd]);
@@ -88,8 +95,8 @@ char	*get_next_line(int fd)
 	buffer[fd] = delete_line(buffer[fd]);
 	return (ret);
 }
-
-/* #include <fcntl.h>
+/*
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -121,4 +128,4 @@ int	main(void)
 	close(fd);
 	return (0);
 }
- */
+*/
